@@ -1,0 +1,12 @@
+:rails:
+  conditionals.html.haml:
+    - Summary
+    - Boogabooga
+  blocks.html.haml:
+    - I'm a little teapot
+:fast-gettext:
+  fast_gettext_conditionals.html.haml:
+    - Summaries rock
+    - Boogabooga and how
+  fast_gettext_blocks.html.haml:
+    - I'm a little teapot, short and stout
