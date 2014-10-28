@@ -11,7 +11,11 @@ module Rosette
       protected
 
       def each_function_call(haml_code, &block)
-        super(isolate_ruby(parse_haml(haml_code)).join(';'), &block)
+        lines = isolate_ruby(parse_haml(haml_code))
+
+        super(lines.map(&:ruby_code).join("\n")) do |node, line_number|
+          yield node, lines[line_number - 1].haml_line_number
+        end
       end
 
       private
@@ -30,26 +34,28 @@ module Rosette
         end
 
         lines = []
-        lines << first_line if first_line
+        lines << RubyLine.new(node.line, first_line) if first_line
 
         lines += node.children.flat_map do |child|
           isolate_ruby(child)
         end
 
         if requires_end_statement?(first_line, node)
-          lines << 'end'
+          lines << RubyLine.new(:auto_generated, 'end')
         end
 
         lines
       end
 
       def requires_end_statement?(first_line, node)
-        first_line && (node.value.fetch(:keyword, nil) || has_block?(first_line))
+        first_line && (!!node.value.fetch(:keyword, nil) || !!has_block?(first_line))
       end
 
       def has_block?(text)
         text.strip =~ /do[ |\w,]*\z/
       end
+
+      RubyLine = Struct.new(:haml_line_number, :ruby_code)
 
       class RailsExtractor < HamlExtractor
         protected

@@ -1,12 +1,18 @@
 :rails:
   conditionals.html.haml:
-    - Summary
-    - Boogabooga
+    - key: Summary
+      line_number: 2
+    - key: Boogabooga
+      line_number: 4
   blocks.html.haml:
-    - I'm a little teapot
+    - key: I'm a little teapot
+      line_number: 5
 :fast-gettext:
   fast_gettext_conditionals.html.haml:
-    - Summaries rock
-    - Boogabooga and how
+    - key: Summaries rock
+      line_number: 2
+    - key: Boogabooga and how
+      line_number: 4
   fast_gettext_blocks.html.haml:
-    - I'm a little teapot, short and stout
+    - key: I'm a little teapot, short and stout
+      line_number: 5
