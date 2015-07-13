@@ -9,6 +9,7 @@ gem 'rosette-core', github: 'rosette-proj/rosette-core'
 gem 'rosette-extractor-rb', github: 'rosette-proj/rosette-extractor-rb'
 
 group :development, :test do
+  gem 'expert', '~> 1.0.0'
   gem 'pry-nav'
   gem 'rake'
 end
