@@ -3,6 +3,9 @@
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
+require 'expert'
+Expert.environment.require_all
+
 require 'rspec'
 require 'rosette/extractors/haml-extractor'
 require 'yaml'
